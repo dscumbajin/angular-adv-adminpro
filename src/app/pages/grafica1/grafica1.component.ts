@@ -8,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Grafica1Component implements OnInit {
 
+public labels1: string[] = ['Pan', 'Refresco', 'Tacos'];
+public data1 = [
+  [100, 60, 30]
+];
+
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit() {
   }
 
 }

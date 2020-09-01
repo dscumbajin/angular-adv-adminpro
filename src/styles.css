@@ -16,3 +16,17 @@
     justify-content: center;
     text-align: center;
 }
+
+.img-avatar {
+    width: 150px;
+}
+
+.img-container {
+    display: block;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.img-container img {
+    border-radius: 20px;
+}

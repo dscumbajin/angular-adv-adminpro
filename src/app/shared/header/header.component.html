@@ -149,32 +149,56 @@
                 <!-- Language -->
                 <!-- ============================================================== -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="flag-icon flag-icon-us"></i></a>
-                    <div class="dropdown-menu dropdown-menu-right animated fadeIn fast"> <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-in"></i> India</a> <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-fr"></i> French</a> <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-cn"></i> China</a>                        <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-de"></i> Dutch</a> </div>
+                    <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="flag-icon flag-icon-us"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right animated fadeIn fast"> <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-in"></i> India</a> <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-fr"></i> French</a> <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-cn"></i> China</a>
+                        <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-de"></i> Dutch</a>
+                    </div>
                 </li>
                 <!-- ============================================================== -->
                 <!-- Profile -->
                 <!-- ============================================================== -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="./assets/images/users/1.jpg" alt="user" class="profile-pic" /></a>
+                    <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img [src]="usuario.imagenUrl" alt="user" class="profile-pic" />
+                    </a>
                     <div class="dropdown-menu dropdown-menu-right animated fadeIn fast">
                         <ul class="dropdown-user">
                             <li>
                                 <div class="dw-user-box">
-                                    <div class="u-img"><img src="./assets/images/users/1.jpg" alt="user"></div>
+                                    <div class="u-img">
+                                        <img [src]="usuario.imagenUrl" alt="user">
+                                    </div>
                                     <div class="u-text">
-                                        <h4>Steave Jobs</h4>
-                                        <p class="text-muted">varun@gmail.com</p><a href="pages-profile.html" class="btn btn-rounded btn-danger btn-sm">View Profile</a></div>
+                                        <h4>{{usuario.nombre| slice:0:15 }} {{(usuario.nombre.length > 20) ? '..': ''}}</h4>
+                                        <p class="text-muted">
+                                            {{usuario.email | slice:0:20 }} {{(usuario.email.length > 20) ? '..': ''}}
+                                        </p>
+                                        <a [routerLink]="['perfil']" class="btn btn-rounded btn-danger btn-sm">View Profile</a>
+                                    </div>
                                 </div>
                             </li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="#"><i class="ti-user"></i> My Profile</a></li>
-                            <li><a href="#"><i class="ti-wallet"></i> My Balance</a></li>
-                            <li><a href="#"><i class="ti-email"></i> Inbox</a></li>
+                            <li>
+                                <a [routerLink]="['perfil']" routerLinkActive="active"><i class="ti-user"></i> My Profile</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="ti-wallet"></i> My Balance</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="ti-email"></i> Inbox</a>
+                            </li>
                             <li role="separator" class="divider"></li>
-                            <li><a [routerLink]="['account-settings']"><i class="ti-settings"></i> Account Setting</a></li>
+                            <li>
+                                <a [routerLink]="['account-settings']"><i class="ti-settings"></i> Account Setting</a>
+                            </li>
                             <li role="separator" class="divider"></li>
-                            <li><a class="cursor" (click)="logout()"><i class="fa fa-power-off"></i> Logout</a></li>
+                            <li>
+                                <a class="cursor" (click)="logout()">
+                                    <i class="fa fa-power-off"></i> Logout
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </li>

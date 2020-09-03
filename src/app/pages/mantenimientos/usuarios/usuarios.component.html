@@ -25,7 +25,7 @@
                 <h4 class="card-title">Total de usuarios ({{totalUsuarios}})</h4>
                 <h6 class="card-subtitle">Usuarios registados en la aplicación</h6>
                 <div class="table-responsive">
-                    <table class="table table-striped table-hover">
+                    <table class="table table-striped table-hover table-bordered">
                         <thead>
                             <tr>
                                 <th class="w100">Avatar</th>
@@ -56,10 +56,9 @@
                                 </td>
                                 <td class="text-nowrap text-center">
 
-                                    <a class="cursor" (click)="eliminarUsuario(usuario)" data-toggle="tooltip" data-original-title="Close"> <i class="fa fa-close text-danger"></i> </a>
+                                    <a (click)="eliminarUsuario(usuario)" data-toggle="tooltip" data-original-title="Eliminar"> <i class="fa fa-close text-danger cursor"></i> </a>
                                 </td>
                             </tr>
-
 
                         </tbody>
                     </table>

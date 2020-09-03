@@ -53,14 +53,19 @@ export class BusquedasService {
           switch (tipo) {
             case 'usuarios':
               return this.trasformarUsuarios(resp.resultados);
-              case 'hospitales':
-                return this.trasformarHospitales(resp.resultados);
-                case 'medicos':
+            case 'hospitales':
+              return this.trasformarHospitales(resp.resultados);
+            case 'medicos':
               return this.trasformarMedicos(resp.resultados);
             default:
               return [];
           }
         })
       );
+  }
+
+  busquedaGlobal(termino: string) {
+    const url = `${base_url}/todo/${termino}`;
+    return this.http.get(url, this.headers);
   }
 }

@@ -2,6 +2,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 
 import { AuthGuard } from '../guards/auth.guard';
+import { AdminGuard } from '../guards/admin.guard';
 
 import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -17,33 +18,39 @@ import { UsuariosComponent } from './mantenimientos/usuarios/usuarios.component'
 import { HospitalesComponent } from './mantenimientos/hospitales/hospitales.component';
 import { MedicosComponent } from './mantenimientos/medicos/medicos.component';
 import { MedicoComponent } from './mantenimientos/medicos/medico.component';
+import { BusquedasComponent } from './busquedas/busquedas.component';
 
 
 const routes: Routes = [
-    {
-        path: 'dashboard',
-        component: PagesComponent,
-        canActivate: [AuthGuard],
-        children: [
-          { path: '', component: DashboardComponent, data: { titulo: 'Dashboard'} },
-          { path: 'progress', component: ProgressComponent, data: { titulo: 'ProgressBar'} },
-          { path: 'grafica1', component: Grafica1Component, data: { titulo: 'Gráfica #1 '} },
-          { path: 'account-settings', component: AccountSettingsComponent, data: { titulo: 'Ajustes de Tema'} },
-          { path: 'promesas', component: PromesasComponent, data: { titulo: 'Promesas'} },
-          { path: 'rxjs', component: RxjsComponent, data: { titulo: 'RxJs'} },
-          { path: 'perfil', component: PerfilComponent, data: { titulo: 'Perfil de usuario'} },
+  {
+    path: 'dashboard',
+    component: PagesComponent,
+    canActivate: [AuthGuard],
+    children: [
 
-          // Mantenimientos
-          { path: 'usuarios', component: UsuariosComponent, data: { titulo: 'Mantenimiento de Usuarios'} },
-          { path: 'hospitales', component: HospitalesComponent, data: { titulo: 'Mantenimiento de Hospitales'} },
-          { path: 'medicos', component: MedicosComponent, data: { titulo: 'Mantenimiento de Médicos'} },
-          { path: 'medico/:id', component: MedicoComponent, data: { titulo: 'Mantenimiento de Médicos'} },
-        ]
-      }
+      { path: '', component: DashboardComponent, data: { titulo: 'Dashboard' } },
+      { path: 'account-settings', component: AccountSettingsComponent, data: { titulo: 'Ajustes de Tema' } },
+      { path: 'buscar/:termino', component: BusquedasComponent, data: { titulo: 'Busquedas' } },
+      { path: 'grafica1', component: Grafica1Component, data: { titulo: 'Gráfica #1 ' } },
+      { path: 'perfil', component: PerfilComponent, data: { titulo: 'Perfil de usuario' } },
+      { path: 'progress', component: ProgressComponent, data: { titulo: 'ProgressBar' } },
+      { path: 'promesas', component: PromesasComponent, data: { titulo: 'Promesas' } },
+      { path: 'rxjs', component: RxjsComponent, data: { titulo: 'RxJs' } },
+
+
+      // Mantenimientos
+      { path: 'hospitales', component: HospitalesComponent, data: { titulo: 'Mantenimiento de Hospitales' } },
+      { path: 'medicos', component: MedicosComponent, data: { titulo: 'Mantenimiento de Médicos' } },
+      { path: 'medico/:id', component: MedicoComponent, data: { titulo: 'Mantenimiento de Médicos' } },
+      // Rutas de ADMIN_ROLE
+      { path: 'usuarios', canActivate: [AdminGuard], component: UsuariosComponent, data: { titulo: 'Mantenimiento de Usuarios' } },
+
+    ]
+  }
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule]
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
 })
-export class PagesRoutingModule {}
+export class PagesRoutingModule { }

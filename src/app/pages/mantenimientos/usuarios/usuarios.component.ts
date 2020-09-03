@@ -105,7 +105,17 @@ export class UsuariosComponent implements OnInit, OnDestroy{
 
   cambiarRole(usuario: Usuario) {
     this.usuarioService.guardarUsuario(usuario)
-      .subscribe(resp => console.log(resp));
+      .subscribe(resp => {
+        //console.log(resp);
+      }, (err) => {
+        // Si sucede un error
+        Swal.fire({
+          title: 'Error!',
+          text: err.error.msg,
+          icon: 'error',
+          confirmButtonText: 'Ok'
+        });
+      } );
   }
 
   abrirModal(usuario: Usuario) {

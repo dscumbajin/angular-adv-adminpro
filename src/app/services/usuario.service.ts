@@ -44,6 +44,14 @@ export class UsuarioService {
     };
   }
 
+  get role(): 'ADMIN_ROLE'|'USER_ROLE'{
+    return this.usuario.role;
+  }
+  guardarLocalStorge( token: string, menu: any){
+    localStorage.setItem('token', token);
+    localStorage.setItem('menu', JSON.stringify(menu));
+  }
+
   // Autenticación Google
   googleInit() {
     return new Promise(resolve => {
@@ -59,6 +67,7 @@ export class UsuarioService {
 
   logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('menu');
 
     this.auth2.signOut().then(() => {
 
@@ -78,7 +87,7 @@ export class UsuarioService {
         // console.log(resp);
         const { email, google, nombre, role, img = '', uid } = resp.usuario;
         this.usuario = new Usuario(nombre, email, '', img, google, role, uid);
-        localStorage.setItem('token', resp.token);
+        this.guardarLocalStorge(resp.token, resp.menu);
         return true;
       }),
       // Atrapa el error y regresa un nuevo observable sin romper el flujo
@@ -91,7 +100,7 @@ export class UsuarioService {
     return this.http.post(`${base_url}/usuarios`, formData)
       .pipe(
         tap((resp: any) => {
-          localStorage.setItem('token', resp.token);
+          this.guardarLocalStorge(resp.token, resp.menu);
         })
       );
 
@@ -112,7 +121,7 @@ export class UsuarioService {
     return this.http.post(`${base_url}/login`, formData)
       .pipe(
         tap((resp: any) => {
-          localStorage.setItem('token', resp.token);
+          this.guardarLocalStorge(resp.token, resp.menu);
         })
       );
 
@@ -123,7 +132,7 @@ export class UsuarioService {
     return this.http.post(`${base_url}/login/google`, { token })
       .pipe(
         tap((resp: any) => {
-          localStorage.setItem('token', resp.token);
+          this.guardarLocalStorge(resp.token, resp.menu);
         })
       );
 

@@ -21,6 +21,8 @@ export class HospitalesComponent implements OnInit, OnDestroy {
   public hospitalesTemp: Hospital[] = [];
   public cargando = true;
   public imgSubs: Subscription;
+  public desde = 0;
+  public totalHospitales = 0;
 
   constructor(private hospitalService: HospitalService, private modalImagenService: ModalImagenService,
               private busquedasService: BusquedasService) { }
@@ -31,7 +33,7 @@ export class HospitalesComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
-    this.cargarHospital();
+    this.cargarHospitalPag();
 
     this.imgSubs = this.modalImagenService.nuevaImagen
       .pipe(
@@ -117,6 +119,30 @@ export class HospitalesComponent implements OnInit, OnDestroy {
 
   abrirModal(hospital: Hospital) {
     this.modalImagenService.abrirModal('hospitales', hospital._id, hospital.img);
+  }
+
+
+  cambiarPagina(valor: number) {
+    this.desde += valor;
+    if (this.desde < 0) {
+      this.desde = 0;
+    } else if (this.desde >= this.totalHospitales) {
+      this.desde -= valor;
+    }
+    this.cargarHospitalPag();
+  }
+
+  cargarHospitalPag() {
+    this.cargando = true;
+    this.hospitalService.cargarHospitalesPag(this.desde)
+    .subscribe(({total, hospitales}) => {
+      this.totalHospitales = total;
+      if (hospitales.length !== 0) {
+        this.hospitales = hospitales;
+        this.hospitalesTemp = hospitales;
+      }
+      this.cargando = false;
+    });
   }
 
 

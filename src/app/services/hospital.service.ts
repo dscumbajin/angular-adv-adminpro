@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { map } from 'rxjs/operators';
 import { Hospital } from '../models/hospital.model';
+import { CargarHospital } from '../interfaces/cargar-hospitales.interface';
 
 const base_url = environment.base_url;
 
@@ -32,7 +33,23 @@ export class HospitalService {
     const url = `${base_url}/hospitales`;
     return this.http.get(url, this.headers)
     .pipe(
-      map( (resp: { ok: boolean, hospitales: Hospital[]}) => resp.hospitales)
+     map( (resp: { ok: boolean, hospitales: Hospital[]}) => resp.hospitales)
+    );
+  }
+
+  cargarHospitalesPag( desde: number = 0) {
+    const url = `${base_url}/hospitales?desde=${desde}`;
+    return this.http.get<CargarHospital>(url, this.headers)
+    .pipe(
+     map( resp => {
+       const hospitales = resp.hospitales.map(
+         hosp => new Hospital(hosp.nombre, hosp._id, hosp.img, hosp.usuario)
+       );
+       return {
+         total: resp.total,
+         hospitales
+       };
+     })
     );
   }
 

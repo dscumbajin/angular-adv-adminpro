@@ -65,8 +65,10 @@
                         </tbody>
                     </table>
                 </div>
-                <!--  <button class="btn btn-secondary">Anterior</button> &nbsp;
-                <button class="btn btn-secondary">Siguinete</button> -->
+                <div *ngIf="txtTermino.value.length === 0" class="">
+                    <button (click)="cambiarPagina(-5)" class="btn btn-secondary">Anterior</button> &nbsp;
+                    <button (click)="cambiarPagina(5)" class="btn btn-secondary">Siguinete</button>
+                </div>
             </div>
         </div>
     </div>

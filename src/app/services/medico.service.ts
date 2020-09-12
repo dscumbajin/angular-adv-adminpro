@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
 
 import { Medico } from '../models/medico.model';
+import { CargarMedico } from '../interfaces/cargar-medicos.interface';
 
 const base_url = environment.base_url;
 
@@ -34,6 +35,22 @@ export class MedicoService {
     return this.http.get(url, this.headers)
     .pipe(
       map( (resp: { ok: boolean, medicos: Medico[]}) => resp.medicos)
+    );
+  }
+
+  cargarMedicosPag( desde: number = 0) {
+    const url = `${base_url}/medicos/?desde=${desde}`;
+    return this.http.get<CargarMedico>(url, this.headers)
+    .pipe(
+     map( resp => {
+       const medicos = resp.medicos.map(
+         med => new Medico(med.nombre, med._id, med.img, med.usuario, med.hospital)
+       );
+       return {
+         total: resp.total,
+         medicos
+       };
+     })
     );
   }
 

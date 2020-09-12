@@ -25,8 +25,8 @@
 
                 <div class="row">
                     <div class="col-8">
-                        <h4 class="card-title">Medicos ({{medicos.length}})</h4>
-                        <h6 class="card-subtitle">Medicos registados en la aplicación TODO: impl paginacion backendServer</h6>
+                        <h4 class="card-title">Medicos ({{totalMedicos}})</h4>
+                        <h6 class="card-subtitle">Medicos registados en la aplicación</h6>
                     </div>
                     <div class="col">
                         <div class="text-right">
@@ -68,8 +68,10 @@
                         </tbody>
                     </table>
                 </div>
-                <!-- <button class="btn btn-secondary">Anterior</button> &nbsp;
-                <button class="btn btn-secondary">Siguinete</button> -->
+                <div *ngIf="txtTermino.value.length === 0" class="">
+                    <button (click)="cambiarPagina(-5)" class="btn btn-secondary">Anterior</button> &nbsp;
+                    <button (click)="cambiarPagina(5)" class="btn btn-secondary">Siguinete</button>
+                </div>
             </div>
         </div>
     </div>

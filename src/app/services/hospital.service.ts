@@ -38,7 +38,7 @@ export class HospitalService {
   }
 
   cargarHospitalesPag( desde: number = 0) {
-    const url = `${base_url}/hospitales?desde=${desde}`;
+    const url = `${base_url}/hospitales/todo/?desde=${desde}`;
     return this.http.get<CargarHospital>(url, this.headers)
     .pipe(
      map( resp => {

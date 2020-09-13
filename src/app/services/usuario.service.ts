@@ -57,7 +57,7 @@ export class UsuarioService {
     return new Promise(resolve => {
       gapi.load('auth2', () => {
         this.auth2 = gapi.auth2.init({
-          client_id: '69645270415-296k6komtt9n2cidvufa9qvvhifc1tjd.apps.googleusercontent.com',
+          client_id: '69645270415-cd99cb4mvrsift9fbtq51ka4o7vqs6l6.apps.googleusercontent.com',
           cookiepolicy: 'single_host_origin',
         });
         resolve();
